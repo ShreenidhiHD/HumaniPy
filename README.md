@@ -1,10 +1,11 @@
-# HumaniPy 🐍✨
+# HumaniPy
 
-_"Because even your bots deserve to act a little more human."_
+"Because even your bots deserve to act a little more human."
 
-HumaniPy is a Python package that helps simulate human-like behavior in web automation tasks. It adds random delays, human-like scrolling, stealth, and more to make automation safer and more natural.
+HumaniPy is a Python package that helps simulate human-like behavior in web automation tasks. It adds random delays, human-like interactions, and other features to make web scraping and automation safer and more natural.
 
 ## Features:
+
 - **Random Delays**: Mimic human hesitations with random pauses.
 - **Stealth Mode**: Change headers, user-agent, and more to avoid detection.
 - **Scrolling**: Scroll naturally, just like a human.
@@ -15,16 +16,20 @@ HumaniPy is a Python package that helps simulate human-like behavior in web auto
 - **Validation**: Built-in validation for scrolling percentages and typing speeds.
 
 ## Installation:
+
 You can install it with **Poetry**:
 ```bash
 poetry add humani_py
+```
 Or with pip:
+```bash
 pip install humani_py
+```
 
-Usage:
-Basic Example:
-python
-Copy code
+## Usage:
+
+### Basic Example:
+```python
 from humani_py import random_delay, apply_stealth, scroll_page, human_typing, get_scroll_position, reset_scroll_position
 
 driver = webdriver.Chrome()
@@ -48,22 +53,10 @@ print(f"Current scroll position: {current_scroll}")
 
 # Reset scroll position to the top
 reset_scroll_position(driver)
-Retry Example:
-python
-Copy code
-from humani_py.utils import retry_on_failure
+```
 
-@retry_on_failure(retries=3, delay=2.0)
-def perform_click_action(driver, element):
-    """Attempt to click an element with retries."""
-    element.click()
-
-# Example usage
-button = driver.find_element_by_id('submit-button')
-perform_click_action(driver, button)
-Scroll Handling:
-python
-Copy code
+### Scroll Handling:
+```python
 from humani_py.utils import get_scroll_position, reset_scroll_position
 
 # Get the current scroll position
@@ -72,9 +65,10 @@ print(f"Current scroll position: {current_scroll}")
 
 # Reset scroll position to the top
 reset_scroll_position(driver)
-Validation:
-python
-Copy code
+```
+
+### Validation:
+```python
 from humani_py.utils import validate_percentage, validate_speed
 
 # Validate scroll percentage
@@ -82,3 +76,4 @@ validate_percentage(80)
 
 # Validate typing speed
 validate_speed(1.5)
+```
