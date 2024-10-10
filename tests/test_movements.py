@@ -5,14 +5,12 @@ from humani_py.movements import random_mouse_move
 
 def test_random_mouse_move():
     mock_driver = MagicMock()
-    mock_element = MagicMock(spec=WebElement)  # Mock WebElement
+    mock_element = MagicMock(spec=WebElement)
 
-    # Mock ActionChains and its methods
     mock_action_chain = MagicMock(spec=ActionChains)
     mock_driver.ActionChains.return_value = mock_action_chain
 
-    # Call the function being tested
-    random_mouse_move(mock_driver, mock_element)
+    random_mouse_move(mock_driver, mock_element, test_mode=True)
 
-    # Verify that move_to_element_with_offset was called
-    mock_action_chain.move_to_element_with_offset.assert_called_with(mock_element, 0, 0)  
+    mock_action_chain.move_to_element_with_offset.assert_called_with(mock_element, 0, 0)
+    mock_action_chain.perform.assert_called_once()
