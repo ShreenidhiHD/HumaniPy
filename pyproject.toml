@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "humani_py"
-version = "0.1.0"
+version = "0.1.1"
 description = "A package to simulate human-like behavior in automation tasks."
-authors = ["Your Name <your.email@example.com>"]
+authors = ["Shreenidhi H D <shreenidhihaagalagodu@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 
