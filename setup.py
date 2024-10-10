@@ -6,9 +6,9 @@ setup(
     description="A package to simulate human-like behavior in automation tasks.",
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
-    author="Your Name",
-    author_email="your.email@example.com",
-    url="https://github.com/yourgithub/humani_py", 
+    author="Shreenidhi HD",
+    author_email="shreenidhihaagalagodu@gmail.com",
+    url="https://github.com/ShreenidhiHD/HumaniPy/", 
     packages=find_packages(),
     install_requires=[
         "selenium>=4.0.0",

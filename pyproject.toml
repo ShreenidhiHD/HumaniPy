@@ -7,8 +7,8 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.6"
-selenium = "^4.0.0"
+python = ">=3.7,<4.0"
+selenium = {version = "^4.0.0", python = ">=3.7"}
 pyautogui = "^0.9.53"
 undetected-chromedriver = "^3.0.0"
 fake-useragent = "^0.1.11"
