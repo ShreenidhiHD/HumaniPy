@@ -1,7 +1,6 @@
 
 # Stealth
 
-**`docs/stealth.md`**:
 ```markdown
 # Stealth Mode
 

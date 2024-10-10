@@ -1,7 +1,5 @@
 
 # Typing
-
-**`docs/typing.md`**:
 ```markdown
 # Typing Simulation
 
