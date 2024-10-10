@@ -1,0 +1,5 @@
+selenium>=4.0.0
+pyautogui>=0.9.53
+undetected-chromedriver>=3.0.0
+fake-useragent>=0.1.11
+pytest = "^7.0.0"
