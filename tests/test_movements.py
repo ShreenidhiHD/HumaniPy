@@ -10,13 +10,12 @@ def test_random_mouse_move(mock_action_chains):
 
     # Create a mock ActionChains object
     mock_action_chain = mock_action_chains.return_value
-    mock_action_chain.move_to_element_with_offset = MagicMock()
 
     # Call the function being tested
     random_mouse_move(mock_driver, mock_element, test_mode=True)
 
     # Verify that move_to_element_with_offset was called once with correct arguments
     mock_action_chain.move_to_element_with_offset.assert_called_once_with(mock_element, 0, 0)
-    
-    # Verify that perform was called
+    # Verify that perform was called once
     mock_action_chain.perform.assert_called_once()
+
