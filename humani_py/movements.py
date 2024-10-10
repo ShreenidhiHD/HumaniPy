@@ -14,3 +14,6 @@ def random_mouse_move(driver: WebDriver, element: WebElement, test_mode: bool = 
     
     action.move_to_element_with_offset(element, x_offset, y_offset).perform()
 
+    
+    # Perform the action
+    action.perform()
