@@ -12,5 +12,5 @@ def test_random_mouse_move():
 
     random_mouse_move(mock_driver, mock_element, test_mode=True)
 
-    mock_action_chain.move_to_element_with_offset.assert_called_with(mock_element, 0, 0)
+    mock_action_chain.move_to_element_with_offset.assert_called_once_with(mock_element, 0, 0)
     mock_action_chain.perform.assert_called_once()
