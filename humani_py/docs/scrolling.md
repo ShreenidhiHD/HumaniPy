@@ -1,7 +1,6 @@
 
-# **Scrolling**
+# Scrolling
 
-**`docs/scrolling.md`**:
 ```markdown
 # Scrolling
 
