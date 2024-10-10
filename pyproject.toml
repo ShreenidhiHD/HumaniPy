@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "humani_py"
+version = "0.1.0"
+description = "A package to simulate human-like behavior in automation tasks."
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+selenium = "^4.0.0"
+pyautogui = "^0.9.53"
+undetected-chromedriver = "^3.0.0"
+fake-useragent = "^0.1.11"
+
+[build-system]
+requires = ["poetry>=1.0.0"]
+build-backend = "poetry.masonry.api"
