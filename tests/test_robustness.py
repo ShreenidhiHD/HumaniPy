@@ -12,14 +12,14 @@ def driver():
     options = webdriver.ChromeOptions()
     options.add_argument("--headless") # Run headless for CI/CD environments
     options.add_argument("--window-size=1920,1080")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
     driver = webdriver.Chrome(options=options)
     yield driver
     driver.quit()
 
 def test_stealth_application(driver):
     apply_stealth(driver, test_mode=True)
-    # In a real test, we'd check navigator.webdriver, but in headless it might still be true without extra flags.
-    # We just ensure it runs without error.
     driver.get("data:text/html,<html><body><h1>Stealth Test</h1></body></html>")
     assert "Stealth Test" in driver.page_source
 
@@ -31,7 +31,8 @@ def test_typing_simulation(driver):
     assert input_box.get_attribute("value") == text_to_type
 
 def test_mouse_movement(driver):
-    driver.get("data:text/html,<html><body><button id='btn' style='position:absolute; left:100px; top:100px;'>Click Me</button></body></html>")
+    # Ensure body has size so we can move relative to it
+    driver.get("data:text/html,<html><body style='width:1000px; height:1000px;'><button id='btn' style='position:absolute; left:100px; top:100px;'>Click Me</button></body></html>")
     btn = driver.find_element(By.ID, "btn")
     # This should not raise an exception
     random_mouse_move(driver, btn, test_mode=True)
