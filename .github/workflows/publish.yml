@@ -1,33 +1,61 @@
-name: Publish to PyPI
+name: Auto Release and Publish
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main
 
 jobs:
-  publish:
+  release-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Required for creating tags and releases
     steps:
       - uses: actions/checkout@v4
-      
+        with:
+          fetch-depth: 0 # Important for checking tags
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.12'
-          
+
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
-          
-      - name: Install dependencies
-        run: poetry install --no-interaction
-        
-      - name: Build package
-        run: poetry build
-        
-      - name: Publish to PyPI
+
+      - name: Check if version is new
+        id: check_version
+        run: |
+          VERSION=$(poetry version -s)
+          TAG="v$VERSION"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists. Skipping release."
+            echo "new_release=false" >> $GITHUB_OUTPUT
+          else
+            echo "Tag $TAG does not exist. Creating release."
+            echo "new_release=true" >> $GITHUB_OUTPUT
+            echo "version=$VERSION" >> $GITHUB_OUTPUT
+            echo "tag=$TAG" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Tag and Release
+        if: steps.check_version.outputs.new_release == 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.check_version.outputs.tag }}
+          name: Release ${{ steps.check_version.outputs.version }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Publish to PyPI
+        if: steps.check_version.outputs.new_release == 'true'
+        run: |
+          poetry install --no-interaction
+          poetry build
+          poetry publish
         env:
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_API_TOKEN }}
-        run: poetry publish
