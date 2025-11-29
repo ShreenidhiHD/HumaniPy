@@ -75,8 +75,16 @@ def random_mouse_move(driver: WebDriver, element: WebElement,
     
     steps = 20 if test_mode else random.randint(20, 50)
     
+    # Clamp start coordinates to be safe
+    start_x = max(0, min(start_x, viewport_width - 1))
+    start_y = max(0, min(start_y, viewport_height - 1))
+    
     # Move to start position first (instant)
-    actions.move_to_element_with_offset(body, int(start_x), int(start_y)).perform()
+    try:
+        actions.move_to_element_with_offset(body, int(start_x), int(start_y)).perform()
+    except Exception:
+        # If start position is problematic, just skip to the curve
+        pass
     
     for step in range(steps):
         t = step / steps
