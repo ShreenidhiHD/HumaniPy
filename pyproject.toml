@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "humani_py"
-version = "0.2.0"
+version = "0.2.1"
 description = "A package to simulate human-like behavior in automation tasks."
 authors = ["Shreenidhi H D <shreenidhihaagalagodu@gmail.com>"]
 license = "MIT"
