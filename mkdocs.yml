@@ -1,0 +1,35 @@
+site_name: HumaniPy
+site_description: A Python package to simulate human-like behavior in automation tasks.
+site_author: Shreenidhi H D
+repo_url: https://github.com/ShreenidhiHD/HumaniPy
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+  palette:
+    - scheme: default
+      primary: teal
+      accent: purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: lime
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+docs_dir: humani_py/docs
+
+nav:
+  - Home: index.md
+  - Features:
+    - Movements: movements.md
+    - Stealth: stealth.md
+    - Typing: typing.md
+    - Scrolling: scrolling.md
+    - Delays: delays.md
+    - Utils: utils.md
