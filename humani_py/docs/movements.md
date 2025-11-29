@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `random_mouse_move` function is part of the `movements` feature in HumaniPy. It simulates human-like mouse movements, designed to mimic real user interactions when automating web browsing.
+The `random_mouse_move` function is part of the `movements` feature in HumaniPy. It simulates **true** human-like mouse movements using Bezier curves and Selenium's `ActionChains`. This replaces the older method of scrolling to elements, providing a much more realistic and undetectable interaction.
 
 ## Function Signature
 
@@ -21,10 +21,10 @@ def random_mouse_move(
 
 - `driver` (WebDriver): The WebDriver instance controlling the browser.
 - `element` (WebElement): The target element to move the mouse to.
-- `overshoot` (bool, optional): Whether to simulate overshooting the target. Default is `True`.
-- `easing` (bool, optional): Adds smooth acceleration/deceleration. Default is `True`.
-- `random_pauses` (bool, optional): Introduces random pauses during movement. Default is `True`.
-- `speed` (float, optional): Base speed of the mouse movement. Default is `1.0`.
+- `overshoot` (bool, optional): Whether to simulate overshooting the target before correcting. Default is `True`.
+- `easing` (bool, optional): Adds smooth acceleration/deceleration to the movement. Default is `True`.
+- `random_pauses` (bool, optional): Introduces random micro-pauses during movement to simulate human hesitation. Default is `True`.
+- `speed` (float, optional): Speed multiplier. Higher values result in *slower* movement (it acts as a delay multiplier). Default is `1.0`.
 
 ## Return Value
 
@@ -32,25 +32,14 @@ def random_mouse_move(
 
 ## Description
 
-The `random_mouse_move` function simulates natural mouse movements to a given element. It includes options for overshooting the target, applying easing effects, and introducing random pauses to make the movement appear more human-like.
+The `random_mouse_move` function calculates a natural, curved path from the current mouse position (or a random start point) to the target element. It uses cubic Bezier curves to generate the path and `ActionChains` to perform the movement in small increments.
 
 ## Example Usage
 
 ```python
 from humani_py.movements import random_mouse_move
 
-# Assuming you have already set up your WebDriver and found your target element
-driver = # ... your WebDriver instance
-target_element = # ... your target WebElement
-
 # Move the mouse to the specific element with natural behavior
-random_mouse_move(driver, target_element, overshoot=True, easing=True, random_pauses=True, speed=1.0)
+random_mouse_move(driver, target_element, overshoot=True, speed=1.0)
+target_element.click()
 ```
-
-This example demonstrates how to use the `random_mouse_move` function to simulate a human-like mouse movement to a specific web element.
-
-## Notes
-
-- This function is particularly useful for automating web interactions in a way that mimics human behavior.
-- It can help in avoiding detection by anti-bot systems that look for perfectly straight or unnaturally fast mouse movements.
-- Adjusting the `speed` parameter allows for fine-tuning the overall speed of the mouse movement.

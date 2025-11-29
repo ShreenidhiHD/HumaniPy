@@ -1,9 +1,8 @@
-
 # Typing
-```markdown
+
 # Typing Simulation
 
-The `typing` feature simulates human typing with random keystrokes to make automation look natural.
+The `typing` feature simulates human typing with random keystrokes, variable speeds, and occasional typos to make automation look natural.
 
 ## Functions
 
@@ -12,9 +11,11 @@ The `typing` feature simulates human typing with random keystrokes to make autom
 Simulates typing text into a given input field, mimicking human typing speed and errors.
 
 #### Parameters:
-- `input_element` (WebElement): The input element to type in.
+- `element` (WebElement): The input element to type in.
 - `text` (str): The text to type.
-- `speed` (float, optional): Typing speed in seconds per character.
+- `min_speed` (float, optional): Minimum delay between keystrokes in seconds. Default is `0.05`.
+- `max_speed` (float, optional): Maximum delay between keystrokes in seconds. Default is `0.2`.
+- `typo_chance` (float, optional): Probability (0.0 to 1.0) of making a typo per character. Default is `0.05`.
 
 #### Returns:
 - `None`
@@ -23,5 +24,6 @@ Simulates typing text into a given input field, mimicking human typing speed and
 ```python
 from humani_py.typing import human_typing
 
-# Type "Hello World" into a search box
-human_typing(search_box, "Hello World")
+# Type "Hello World" with a slight chance of typos
+human_typing(search_box, "Hello World", min_speed=0.05, max_speed=0.15, typo_chance=0.1)
+```
