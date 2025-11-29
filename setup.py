@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="HumaniPy",
-    version="0.1",
+    version="1.0.0",
     description="A package to simulate human-like behavior in automation tasks.",
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",

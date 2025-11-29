@@ -11,6 +11,7 @@ import time
 def driver():
     options = webdriver.ChromeOptions()
     options.add_argument("--headless") # Run headless for CI/CD environments
+    options.add_argument("--window-size=1920,1080")
     driver = webdriver.Chrome(options=options)
     yield driver
     driver.quit()
