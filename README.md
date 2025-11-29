@@ -6,31 +6,29 @@ HumaniPy is a Python package that helps simulate human-like behavior in web auto
 
 ## Features:
 
-- **Random Delays**: Mimic human hesitations with random pauses.
-- **Stealth Mode**: Change headers, user-agent, and more to avoid detection.
-- **Scrolling**: Scroll naturally, just like a human.
-- **Typing Simulation**: Type like a real person with random keystrokes.
-- **Mouse Movements**: Move the mouse like a real user.
-- **Scroll Position Management**: Get or reset the current scroll position.
-- **Retries**: Automatically retry actions if they fail with customizable delay and retry limits.
-- **Validation**: Built-in validation for scrolling percentages and typing speeds.
+- **True Mouse Movements**: Simulates realistic mouse cursor paths using Bezier curves and `ActionChains`.
+- **Enhanced Stealth**: Hides `navigator.webdriver` and randomizes window dimensions to avoid fingerprinting.
+- **Natural Typing**: Simulates human typing with variable speeds and occasional typos (with corrections).
+- **Smooth Scrolling**: Scrolls the page naturally with smooth behavior and random pauses.
+- **Retries**: Automatically retry actions if they fail.
 
 ## Installation:
 
-You can install it with **Poetry**:
+You can install the dependencies using pip:
+
 ```bash
-poetry add humani_py
-```
-Or with pip:
-```bash
-pip install humani_py
+pip install -r requirements.txt
 ```
 
 ## Usage:
 
 ### Basic Example:
 ```python
-from humani_py import random_delay, apply_stealth, scroll_page, human_typing, get_scroll_position, reset_scroll_position
+from selenium import webdriver
+from humani_py.stealth import apply_stealth
+from humani_py.typing import human_typing
+from humani_py.scrolling import scroll_page
+from humani_py.movements import random_mouse_move
 
 driver = webdriver.Chrome()
 
@@ -41,30 +39,14 @@ apply_stealth(driver)
 driver.get('https://example.com')
 
 # Simulate typing in a search box
-search_box = driver.find_element_by_name('q')
+search_box = driver.find_element("name", "q")
 human_typing(search_box, "Hello World")
+
+# Move mouse to an element naturally
+random_mouse_move(driver, search_box)
 
 # Scroll naturally down the page
 scroll_page(driver, direction="down", percentage=80, speed=2.0)
-
-# Get the current scroll position
-current_scroll = get_scroll_position(driver)
-print(f"Current scroll position: {current_scroll}")
-
-# Reset scroll position to the top
-reset_scroll_position(driver)
-```
-
-### Scroll Handling:
-```python
-from humani_py.utils import get_scroll_position, reset_scroll_position
-
-# Get the current scroll position
-current_scroll = get_scroll_position(driver)
-print(f"Current scroll position: {current_scroll}")
-
-# Reset scroll position to the top
-reset_scroll_position(driver)
 ```
 
 ### Validation:
